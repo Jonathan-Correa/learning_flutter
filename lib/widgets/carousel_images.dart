@@ -86,13 +86,18 @@ class CarouselImageItem extends StatelessWidget {
             }),
           );
         },
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(15),
-          child: Hero(
-            tag: id,
-            child: CachedNetworkImage(
-              imageUrl: imgUrl,
-            ),
+        child: Hero(
+          tag: id,
+          child: CachedNetworkImage(
+            imageUrl: imgUrl,
+            imageBuilder: (context, imageProvider) {
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image(
+                  image: imageProvider,
+                ),
+              );
+            },
           ),
         ),
       ),

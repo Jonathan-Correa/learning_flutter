@@ -13,14 +13,24 @@ class FullImageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Vista de imagen'),
+        title: const Text('Vista de imagen'),
       ),
-      body: Align(
-        alignment: Alignment.bottomRight,
-        child: Hero(
-          tag: imgId,
-          child: CachedNetworkImage(
-            imageUrl: 'https://picsum.photos/id/$imgId/200/300',
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 30),
+          child: Hero(
+            tag: imgId,
+            child: CachedNetworkImage(
+              imageUrl: 'https://picsum.photos/id/$imgId/200/300',
+              imageBuilder: (context, imageProvider) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image(
+                    image: imageProvider,
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ),
