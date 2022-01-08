@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_flutter/screens/home_screen.dart';
+import 'package:test_flutter/widgets/carousel_images.dart';
 
 class ImagesScreen extends StatefulWidget {
   const ImagesScreen({Key? key}) : super(key: key);
