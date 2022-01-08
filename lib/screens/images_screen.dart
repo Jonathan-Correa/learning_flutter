@@ -18,11 +18,11 @@ class _ImagesScreenState extends State<ImagesScreen> {
           page: 1,
           limit: 10,
         ),
-        CarouselImages(
-          imagesUrl: 'https://picsum.photos/v2/list',
-          page: 1,
-          limit: 2,
-        )
+        // CarouselImages(
+        //   imagesUrl: 'https://picsum.photos/v2/list',
+        //   page: 1,
+        //   limit: 2,
+        // )
       ],
     );
   }

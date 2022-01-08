@@ -36,4 +36,21 @@ class ImagesService {
     /// Si el codigo de la respuesta fue diferente a 200, devolver un error
     throw Exception('Hubo un error al cargar las imagenes');
   }
+
+  static dynamic getImageById(int id) async {
+    final url = Uri.parse('https://picsum.photos/id/$id/200/300');
+
+    /// Esperar la respuesta de la api
+    final response = await http.get(url);
+
+    // Si la respuesta fue correcta, convertir el string a una variable dinamica (en este caso)
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body);
+      print(body.runtimeType);
+      return body;
+    }
+
+    /// Si el codigo de la respuesta fue diferente a 200, devolver un error
+    throw Exception('Hubo un error al cargar las imagenes');
+  }
 }

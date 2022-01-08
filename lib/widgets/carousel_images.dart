@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:test_flutter/screens/full_image_screen.dart';
 import 'package:test_flutter/services/images_service.dart';
 
 /// Mustra un carousel de imagenes desde la ruta indicada
@@ -39,7 +41,10 @@ class CarouselImages extends StatelessWidget {
             padding: const EdgeInsets.only(top: 15),
             child: CarouselSlider(
               items: images.map((img) {
-                return CarouselImageItem(imgUrl: img['download_url']);
+                return CarouselImageItem(
+                  imgUrl: img['download_url'],
+                  id: img['id'],
+                );
               }).toList(),
               options: CarouselOptions(
                 height: 300,
@@ -61,21 +66,33 @@ class CarouselImageItem extends StatelessWidget {
   const CarouselImageItem({
     Key? key,
     required this.imgUrl,
+    required this.id,
   }) : super(key: key);
 
   final String imgUrl;
+  final String id;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       // Widget para moldear imagen, cambiar [borderRadius] etc...
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: Image(
-          fit: BoxFit.cover,
-          image: NetworkImage(
-            imgUrl,
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return FullImageScreen(imgId: id);
+            }),
+          );
+        },
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: Hero(
+            tag: id,
+            child: CachedNetworkImage(
+              imageUrl: imgUrl,
+            ),
           ),
         ),
       ),
